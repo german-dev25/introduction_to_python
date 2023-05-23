@@ -10,7 +10,7 @@
 **Ввод:** пара-ра-рам рам-пам-папам па-ра-па-да
 **Вывод:** Парам пам-пам"""
 
-from typing import List
+from typing import List, Callable
 
 
 def count_vowel(one_phrase: list) -> int:
@@ -24,14 +24,26 @@ def count_vowel(one_phrase: list) -> int:
     return phrase_vowel_count
 
 
-poem: str = input('Стихотворение: ')
-vowels_of_phrases: set = set()
-split_poem: List[List[str]]
+def split_text(text: str) -> List[List[str]]:
+    return [word.split('-') for word in text.strip().split()]
 
-# "нарезаем" стих на фразы и тут же на слова
-split_poem = [word.split('-') for word in poem.strip().split()]
 
-for phrase in split_poem:
-    vowels_of_phrases.add(count_vowel(one_phrase=phrase))
+def rhyme_indicator(text: str,
+                    counter: Callable[[List[str]], int] = count_vowel,
+                    splitter: Callable[[str], List[List[str]]] = split_text,
+                    ) -> int:
+    vowels_of_phrases: set = set()
+    for phrase in splitter(text):
+        vowels_of_phrases.add(counter(phrase))
+    return len(vowels_of_phrases)
 
-print('Парам пам-пам' if len(vowels_of_phrases) == 1 else 'Пам парам')
+
+def result_print(text: str, indicator=rhyme_indicator) -> None:
+    print('Парам пам-пам' if indicator(text) == 1 else 'Пам парам')
+
+
+def main():
+    result_print(text=str(input('Стихотворение: ')))
+
+
+main()
