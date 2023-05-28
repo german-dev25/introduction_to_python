@@ -18,25 +18,7 @@ def main():
             continue
         command = int(command)
 
-        if command == 1:
-            phonebook.content = file.process_file(mode='r')
-        if command == 2:
-            phonebook.content = file.process_file(mode='w')
-        if command == 3:
-            phonebook.content = content.show_all_contacts()
-        if command == 4:
-            phonebook.content = content.add_contact()
-        if command == 5:
-            phonebook.content = content.search_contact(
-                search=input('Введите текст для поиска: '))
-        if command == 6:
-            phonebook.content = content.update_contact(
-                search=input('Введите текст для поиска и обновления: '))
-        if command == 7:
-            phonebook.content = content.delete_contact(
-                search=input('Введите текст для поиска и удаления: '))
-        if command == 8:
-            phonebook.exit_app()
+        phonebook.content = eval(COMMANDS[command][1])
 
 
 if __name__ == "__main__":

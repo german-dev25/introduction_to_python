@@ -19,7 +19,7 @@ class ContentHandler:
     def add_contact(self) -> str:
         data_list = [input(column + ': ') or 'Отсутствует'
                      for column in COLUMNS]
-        new_contact = f' {DELIMITER_COL} '.join(data_list) + '\n'
+        new_contact = '\n' + f' {DELIMITER_COL} '.join(data_list)
         return self.phonebook.content + new_contact
 
     @check_content

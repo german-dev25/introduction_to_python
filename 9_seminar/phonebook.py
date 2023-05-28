@@ -11,7 +11,7 @@ class Phonebook:
         self.print_separator(columns)
         print('Список команд:')
         for key, value in self.commands.items():
-            print(f'{key}. {value}')
+            print(f'{key}. {value[0]}')
         self.print_separator(columns)
 
     @staticmethod
@@ -31,3 +31,4 @@ class Phonebook:
     def exit_app():
         print('Выход из программы.')
         exit()
+        return None
